@@ -30,13 +30,13 @@ namespace practice
 
         private void btn_Update_Click(object sender, EventArgs e)
         {
-            string Familiy = tb_Familiya.Text.Replace(" ", "");
+            string Familiy = tb_Familiya.Text.Replace(" ", ""); // Replace - чтобы не было пробелов
             string Name = tb_Name.Text.Replace(" ", "");
             string Otchestvo = tb_Otchestvo.Text.Replace(" ", "");
-            Byte ID_Pol = Convert.ToByte(cb_Pol.SelectedIndex + 1);//+1, тк в базе 1 - мужской, 2 женский
-            Byte Vozrast = Convert.ToByte(nud_Vozrast.Value);
-            Int16 Ves = Convert.ToInt16(nud_Ves.Value);
-            string Znak_zodiaka = tb_znak.Text.Trim();
+            Byte ID_Pol = Convert.ToByte(cb_Pol.SelectedIndex + 1); // +1, тк в базе 1 - мужской, 2 женский
+            Byte Vozrast = Convert.ToByte(nud_Vozrast.Value); // tinyint - в базе
+            Int16 Ves = Convert.ToInt16(nud_Ves.Value); // smallint - в базе
+            string Znak_zodiaka = tb_znak.Text.Trim(); // trim - минус пробелы в начеле и конце
             if (Familiy != "" && Name != "" && Otchestvo != "" && Znak_zodiaka != "")
             {
                 Helper helper = new Helper();
@@ -48,6 +48,11 @@ namespace practice
             {
                 MessageBox.Show("Введите все поля");
             }
+        }
+
+        private void UpdateForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

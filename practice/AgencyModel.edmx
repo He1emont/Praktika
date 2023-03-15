@@ -444,7 +444,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="AgencyEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="AgencyEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Anket" EntityType="Self.Anket" />
           <EntitySet Name="Astrol" EntityType="Self.Astrol" />
           <EntitySet Name="Client" EntityType="Self.Client" />
@@ -493,7 +493,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище AgencyModelContainer" CdmEntityContainer="AgencyEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище AgencyModelContainer" CdmEntityContainer="AgencyEntities1">
           <EntitySetMapping Name="Anket">
             <EntityTypeMapping TypeName="AgencyModel.Anket">
               <MappingFragment StoreEntitySet="Anket">

@@ -13,10 +13,10 @@ namespace practice
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class AgencyEntities : DbContext
+    public partial class AgencyEntities1 : DbContext
     {
-        public AgencyEntities()
-            : base("name=AgencyEntities")
+        public AgencyEntities1()
+            : base("name=AgencyEntities1")
         {
         }
     

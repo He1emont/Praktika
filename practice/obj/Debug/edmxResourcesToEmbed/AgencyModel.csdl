@@ -203,7 +203,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="AgencyEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="AgencyEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Anket" EntityType="Self.Anket" />
     <EntitySet Name="Astrol" EntityType="Self.Astrol" />
     <EntitySet Name="Client" EntityType="Self.Client" />

@@ -8,12 +8,12 @@ namespace practice
 {
     class Helper
     {
-        private static AgencyEntities agencyEntities;
-        public static AgencyEntities GetContext()
+        private static AgencyEntities1 agencyEntities;
+        public static AgencyEntities1 GetContext()
         {
             if (agencyEntities == null)
             {
-                agencyEntities = new AgencyEntities();
+                agencyEntities = new AgencyEntities1();
             }
             return agencyEntities;
         }

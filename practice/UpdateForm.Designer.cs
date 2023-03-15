@@ -232,6 +232,7 @@ namespace practice
             this.Controls.Add(this.label1);
             this.Name = "UpdateForm";
             this.Text = "UpdateForm";
+            this.Load += new System.EventHandler(this.UpdateForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nud_Ves)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Vozrast)).EndInit();
             this.ResumeLayout(false);
