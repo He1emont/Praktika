@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище AgencyModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Anket">
+          <Key>
+            <PropertyRef Name="ID_anket" />
+          </Key>
+          <Property Name="ID_anket" Type="int" Nullable="false" />
+          <Property Name="ID_mened" Type="int" Nullable="false" />
+          <Property Name="ID_test_astrol" Type="int" Nullable="false" />
+          <Property Name="ID_test_psixo" Type="int" Nullable="false" />
+          <Property Name="ID_client" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Astrol">
+          <Key>
+            <PropertyRef Name="ID_astrol" />
+          </Key>
+          <Property Name="ID_astrol" Type="int" Nullable="false" />
+          <Property Name="Familiy" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Otchestvo" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ID_clienta" />
+          </Key>
+          <Property Name="ID_clienta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Familiy" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Otchestvo" Type="nvarchar" MaxLength="25" />
+          <Property Name="ID_Pol" Type="tinyint" Nullable="false" />
+          <Property Name="Vozrast" Type="tinyint" Nullable="false" />
+          <Property Name="Ves" Type="smallint" Nullable="false" />
+          <Property Name="Znak_zodiaka" Type="nvarchar" MaxLength="35" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mened">
+          <Key>
+            <PropertyRef Name="ID_mened" />
+          </Key>
+          <Property Name="ID_mened" Type="int" Nullable="false" />
+          <Property Name="Familiy" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Otchestvo" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Para">
+          <Key>
+            <PropertyRef Name="ID_par" />
+          </Key>
+          <Property Name="ID_par" Type="int" Nullable="false" />
+          <Property Name="ID_anket" Type="int" Nullable="false" />
+          <Property Name="ID_anket2" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pol">
+          <Key>
+            <PropertyRef Name="ID_Pol" />
+          </Key>
+          <Property Name="ID_Pol" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Psixo">
+          <Key>
+            <PropertyRef Name="ID_psixo" />
+          </Key>
+          <Property Name="ID_psixo" Type="int" Nullable="false" />
+          <Property Name="Familiy" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Otchestvo" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Test_astrol">
+          <Key>
+            <PropertyRef Name="ID_test_astrol" />
+          </Key>
+          <Property Name="ID_test_astrol" Type="int" Nullable="false" />
+          <Property Name="Test" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ID_astrol" Type="int" />
+        </EntityType>
+        <EntityType Name="Test_psixo">
+          <Key>
+            <PropertyRef Name="ID_test_psixo" />
+          </Key>
+          <Property Name="ID_test_psixo" Type="int" Nullable="false" />
+          <Property Name="Test" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ID_psixo" Type="int" />
+        </EntityType>
+        <Association Name="FK_Anket_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Anket" Type="Self.Anket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID_clienta" />
+            </Principal>
+            <Dependent Role="Anket">
+              <PropertyRef Name="ID_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Anket_Mened">
+          <End Role="Mened" Type="Self.Mened" Multiplicity="1" />
+          <End Role="Anket" Type="Self.Anket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mened">
+              <PropertyRef Name="ID_mened" />
+            </Principal>
+            <Dependent Role="Anket">
+              <PropertyRef Name="ID_mened" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Anket_Test_astrol">
+          <End Role="Test_astrol" Type="Self.Test_astrol" Multiplicity="1" />
+          <End Role="Anket" Type="Self.Anket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test_astrol">
+              <PropertyRef Name="ID_test_astrol" />
+            </Principal>
+            <Dependent Role="Anket">
+              <PropertyRef Name="ID_test_astrol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Anket_Test_psixo">
+          <End Role="Test_psixo" Type="Self.Test_psixo" Multiplicity="1" />
+          <End Role="Anket" Type="Self.Anket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test_psixo">
+              <PropertyRef Name="ID_test_psixo" />
+            </Principal>
+            <Dependent Role="Anket">
+              <PropertyRef Name="ID_test_psixo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Pol">
+          <End Role="Pol" Type="Self.Pol" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pol">
+              <PropertyRef Name="ID_Pol" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="ID_Pol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Para_Anket">
+          <End Role="Anket" Type="Self.Anket" Multiplicity="1" />
+          <End Role="Para" Type="Self.Para" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Anket">
+              <PropertyRef Name="ID_anket" />
+            </Principal>
+            <Dependent Role="Para">
+              <PropertyRef Name="ID_anket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Test_astrol_Astrol">
+          <End Role="Astrol" Type="Self.Astrol" Multiplicity="0..1" />
+          <End Role="Test_astrol" Type="Self.Test_astrol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Astrol">
+              <PropertyRef Name="ID_astrol" />
+            </Principal>
+            <Dependent Role="Test_astrol">
+              <PropertyRef Name="ID_astrol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Test_psixo_Psixo">
+          <End Role="Psixo" Type="Self.Psixo" Multiplicity="0..1" />
+          <End Role="Test_psixo" Type="Self.Test_psixo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Psixo">
+              <PropertyRef Name="ID_psixo" />
+            </Principal>
+            <Dependent Role="Test_psixo">
+              <PropertyRef Name="ID_psixo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище AgencyModelContainer">
+          <EntitySet Name="Anket" EntityType="Self.Anket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Astrol" EntityType="Self.Astrol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mened" EntityType="Self.Mened" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Para" EntityType="Self.Para" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pol" EntityType="Self.Pol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Psixo" EntityType="Self.Psixo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Test_astrol" EntityType="Self.Test_astrol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Test_psixo" EntityType="Self.Test_psixo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Anket_Client" Association="Self.FK_Anket_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Anket" EntitySet="Anket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Anket_Mened" Association="Self.FK_Anket_Mened">
+            <End Role="Mened" EntitySet="Mened" />
+            <End Role="Anket" EntitySet="Anket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Anket_Test_astrol" Association="Self.FK_Anket_Test_astrol">
+            <End Role="Test_astrol" EntitySet="Test_astrol" />
+            <End Role="Anket" EntitySet="Anket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Anket_Test_psixo" Association="Self.FK_Anket_Test_psixo">
+            <End Role="Test_psixo" EntitySet="Test_psixo" />
+            <End Role="Anket" EntitySet="Anket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Pol" Association="Self.FK_Client_Pol">
+            <End Role="Pol" EntitySet="Pol" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Para_Anket" Association="Self.FK_Para_Anket">
+            <End Role="Anket" EntitySet="Anket" />
+            <End Role="Para" EntitySet="Para" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_astrol_Astrol" Association="Self.FK_Test_astrol_Astrol">
+            <End Role="Astrol" EntitySet="Astrol" />
+            <End Role="Test_astrol" EntitySet="Test_astrol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_psixo_Psixo" Association="Self.FK_Test_psixo_Psixo">
+            <End Role="Psixo" EntitySet="Psixo" />
+            <End Role="Test_psixo" EntitySet="Test_psixo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AgencyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Anket">
+          <Key>
+            <PropertyRef Name="ID_anket" />
+          </Key>
+          <Property Name="ID_anket" Type="Int32" Nullable="false" />
+          <Property Name="ID_mened" Type="Int32" Nullable="false" />
+          <Property Name="ID_test_astrol" Type="Int32" Nullable="false" />
+          <Property Name="ID_test_psixo" Type="Int32" Nullable="false" />
+          <Property Name="ID_client" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Anket_Client" FromRole="Anket" ToRole="Client" />
+          <NavigationProperty Name="Mened" Relationship="Self.FK_Anket_Mened" FromRole="Anket" ToRole="Mened" />
+          <NavigationProperty Name="Test_astrol" Relationship="Self.FK_Anket_Test_astrol" FromRole="Anket" ToRole="Test_astrol" />
+          <NavigationProperty Name="Test_psixo" Relationship="Self.FK_Anket_Test_psixo" FromRole="Anket" ToRole="Test_psixo" />
+          <NavigationProperty Name="Para" Relationship="Self.FK_Para_Anket" FromRole="Anket" ToRole="Para" />
+        </EntityType>
+        <EntityType Name="Astrol">
+          <Key>
+            <PropertyRef Name="ID_astrol" />
+          </Key>
+          <Property Name="ID_astrol" Type="Int32" Nullable="false" />
+          <Property Name="Familiy" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Otchestvo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Test_astrol" Relationship="Self.FK_Test_astrol_Astrol" FromRole="Astrol" ToRole="Test_astrol" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ID_clienta" />
+          </Key>
+          <Property Name="ID_clienta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Familiy" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Otchestvo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Pol" Type="Byte" Nullable="false" />
+          <Property Name="Vozrast" Type="Byte" Nullable="false" />
+          <Property Name="Ves" Type="Int16" Nullable="false" />
+          <Property Name="Znak_zodiaka" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Anket" Relationship="Self.FK_Anket_Client" FromRole="Client" ToRole="Anket" />
+          <NavigationProperty Name="Pol" Relationship="Self.FK_Client_Pol" FromRole="Client" ToRole="Pol" />
+        </EntityType>
+        <EntityType Name="Mened">
+          <Key>
+            <PropertyRef Name="ID_mened" />
+          </Key>
+          <Property Name="ID_mened" Type="Int32" Nullable="false" />
+          <Property Name="Familiy" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Otchestvo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Anket" Relationship="Self.FK_Anket_Mened" FromRole="Mened" ToRole="Anket" />
+        </EntityType>
+        <EntityType Name="Para">
+          <Key>
+            <PropertyRef Name="ID_par" />
+          </Key>
+          <Property Name="ID_par" Type="Int32" Nullable="false" />
+          <Property Name="ID_anket" Type="Int32" Nullable="false" />
+          <Property Name="ID_anket2" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Anket" Relationship="Self.FK_Para_Anket" FromRole="Para" ToRole="Anket" />
+        </EntityType>
+        <EntityType Name="Pol">
+          <Key>
+            <PropertyRef Name="ID_Pol" />
+          </Key>
+          <Property Name="ID_Pol" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Client_Pol" FromRole="Pol" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Psixo">
+          <Key>
+            <PropertyRef Name="ID_psixo" />
+          </Key>
+          <Property Name="ID_psixo" Type="Int32" Nullable="false" />
+          <Property Name="Familiy" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Otchestvo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Test_psixo" Relationship="Self.FK_Test_psixo_Psixo" FromRole="Psixo" ToRole="Test_psixo" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Test_astrol">
+          <Key>
+            <PropertyRef Name="ID_test_astrol" />
+          </Key>
+          <Property Name="ID_test_astrol" Type="Int32" Nullable="false" />
+          <Property Name="Test" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID_astrol" Type="Int32" />
+          <NavigationProperty Name="Anket" Relationship="Self.FK_Anket_Test_astrol" FromRole="Test_astrol" ToRole="Anket" />
+          <NavigationProperty Name="Astrol" Relationship="Self.FK_Test_astrol_Astrol" FromRole="Test_astrol" ToRole="Astrol" />
+        </EntityType>
+        <EntityType Name="Test_psixo">
+          <Key>
+            <PropertyRef Name="ID_test_psixo" />
+          </Key>
+          <Property Name="ID_test_psixo" Type="Int32" Nullable="false" />
+          <Property Name="Test" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID_psixo" Type="Int32" />
+          <NavigationProperty Name="Anket" Relationship="Self.FK_Anket_Test_psixo" FromRole="Test_psixo" ToRole="Anket" />
+          <NavigationProperty Name="Psixo" Relationship="Self.FK_Test_psixo_Psixo" FromRole="Test_psixo" ToRole="Psixo" />
+        </EntityType>
+        <Association Name="FK_Anket_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Anket" Type="Self.Anket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID_clienta" />
+            </Principal>
+            <Dependent Role="Anket">
+              <PropertyRef Name="ID_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Anket_Mened">
+          <End Role="Mened" Type="Self.Mened" Multiplicity="1" />
+          <End Role="Anket" Type="Self.Anket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mened">
+              <PropertyRef Name="ID_mened" />
+            </Principal>
+            <Dependent Role="Anket">
+              <PropertyRef Name="ID_mened" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Anket_Test_astrol">
+          <End Role="Test_astrol" Type="Self.Test_astrol" Multiplicity="1" />
+          <End Role="Anket" Type="Self.Anket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test_astrol">
+              <PropertyRef Name="ID_test_astrol" />
+            </Principal>
+            <Dependent Role="Anket">
+              <PropertyRef Name="ID_test_astrol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Anket_Test_psixo">
+          <End Role="Test_psixo" Type="Self.Test_psixo" Multiplicity="1" />
+          <End Role="Anket" Type="Self.Anket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test_psixo">
+              <PropertyRef Name="ID_test_psixo" />
+            </Principal>
+            <Dependent Role="Anket">
+              <PropertyRef Name="ID_test_psixo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Para_Anket">
+          <End Role="Anket" Type="Self.Anket" Multiplicity="1" />
+          <End Role="Para" Type="Self.Para" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Anket">
+              <PropertyRef Name="ID_anket" />
+            </Principal>
+            <Dependent Role="Para">
+              <PropertyRef Name="ID_anket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Test_astrol_Astrol">
+          <End Role="Astrol" Type="Self.Astrol" Multiplicity="0..1" />
+          <End Role="Test_astrol" Type="Self.Test_astrol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Astrol">
+              <PropertyRef Name="ID_astrol" />
+            </Principal>
+            <Dependent Role="Test_astrol">
+              <PropertyRef Name="ID_astrol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Pol">
+          <End Role="Pol" Type="Self.Pol" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pol">
+              <PropertyRef Name="ID_Pol" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="ID_Pol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Test_psixo_Psixo">
+          <End Role="Psixo" Type="Self.Psixo" Multiplicity="0..1" />
+          <End Role="Test_psixo" Type="Self.Test_psixo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Psixo">
+              <PropertyRef Name="ID_psixo" />
+            </Principal>
+            <Dependent Role="Test_psixo">
+              <PropertyRef Name="ID_psixo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AgencyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Anket" EntityType="Self.Anket" />
+          <EntitySet Name="Astrol" EntityType="Self.Astrol" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Mened" EntityType="Self.Mened" />
+          <EntitySet Name="Para" EntityType="Self.Para" />
+          <EntitySet Name="Pol" EntityType="Self.Pol" />
+          <EntitySet Name="Psixo" EntityType="Self.Psixo" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Test_astrol" EntityType="Self.Test_astrol" />
+          <EntitySet Name="Test_psixo" EntityType="Self.Test_psixo" />
+          <AssociationSet Name="FK_Anket_Client" Association="Self.FK_Anket_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Anket" EntitySet="Anket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Anket_Mened" Association="Self.FK_Anket_Mened">
+            <End Role="Mened" EntitySet="Mened" />
+            <End Role="Anket" EntitySet="Anket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Anket_Test_astrol" Association="Self.FK_Anket_Test_astrol">
+            <End Role="Test_astrol" EntitySet="Test_astrol" />
+            <End Role="Anket" EntitySet="Anket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Anket_Test_psixo" Association="Self.FK_Anket_Test_psixo">
+            <End Role="Test_psixo" EntitySet="Test_psixo" />
+            <End Role="Anket" EntitySet="Anket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Para_Anket" Association="Self.FK_Para_Anket">
+            <End Role="Anket" EntitySet="Anket" />
+            <End Role="Para" EntitySet="Para" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_astrol_Astrol" Association="Self.FK_Test_astrol_Astrol">
+            <End Role="Astrol" EntitySet="Astrol" />
+            <End Role="Test_astrol" EntitySet="Test_astrol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Pol" Association="Self.FK_Client_Pol">
+            <End Role="Pol" EntitySet="Pol" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_psixo_Psixo" Association="Self.FK_Test_psixo_Psixo">
+            <End Role="Psixo" EntitySet="Psixo" />
+            <End Role="Test_psixo" EntitySet="Test_psixo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище AgencyModelContainer" CdmEntityContainer="AgencyEntities">
+          <EntitySetMapping Name="Anket">
+            <EntityTypeMapping TypeName="AgencyModel.Anket">
+              <MappingFragment StoreEntitySet="Anket">
+                <ScalarProperty Name="ID_anket" ColumnName="ID_anket" />
+                <ScalarProperty Name="ID_mened" ColumnName="ID_mened" />
+                <ScalarProperty Name="ID_test_astrol" ColumnName="ID_test_astrol" />
+                <ScalarProperty Name="ID_test_psixo" ColumnName="ID_test_psixo" />
+                <ScalarProperty Name="ID_client" ColumnName="ID_client" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Astrol">
+            <EntityTypeMapping TypeName="AgencyModel.Astrol">
+              <MappingFragment StoreEntitySet="Astrol">
+                <ScalarProperty Name="ID_astrol" ColumnName="ID_astrol" />
+                <ScalarProperty Name="Familiy" ColumnName="Familiy" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Otchestvo" ColumnName="Otchestvo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="AgencyModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="ID_clienta" ColumnName="ID_clienta" />
+                <ScalarProperty Name="Familiy" ColumnName="Familiy" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Otchestvo" ColumnName="Otchestvo" />
+                <ScalarProperty Name="ID_Pol" ColumnName="ID_Pol" />
+                <ScalarProperty Name="Vozrast" ColumnName="Vozrast" />
+                <ScalarProperty Name="Ves" ColumnName="Ves" />
+                <ScalarProperty Name="Znak_zodiaka" ColumnName="Znak_zodiaka" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mened">
+            <EntityTypeMapping TypeName="AgencyModel.Mened">
+              <MappingFragment StoreEntitySet="Mened">
+                <ScalarProperty Name="ID_mened" ColumnName="ID_mened" />
+                <ScalarProperty Name="Familiy" ColumnName="Familiy" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Otchestvo" ColumnName="Otchestvo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Para">
+            <EntityTypeMapping TypeName="AgencyModel.Para">
+              <MappingFragment StoreEntitySet="Para">
+                <ScalarProperty Name="ID_par" ColumnName="ID_par" />
+                <ScalarProperty Name="ID_anket" ColumnName="ID_anket" />
+                <ScalarProperty Name="ID_anket2" ColumnName="ID_anket2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pol">
+            <EntityTypeMapping TypeName="AgencyModel.Pol">
+              <MappingFragment StoreEntitySet="Pol">
+                <ScalarProperty Name="ID_Pol" ColumnName="ID_Pol" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Psixo">
+            <EntityTypeMapping TypeName="AgencyModel.Psixo">
+              <MappingFragment StoreEntitySet="Psixo">
+                <ScalarProperty Name="ID_psixo" ColumnName="ID_psixo" />
+                <ScalarProperty Name="Familiy" ColumnName="Familiy" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Otchestvo" ColumnName="Otchestvo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="AgencyModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Test_astrol">
+            <EntityTypeMapping TypeName="AgencyModel.Test_astrol">
+              <MappingFragment StoreEntitySet="Test_astrol">
+                <ScalarProperty Name="ID_test_astrol" ColumnName="ID_test_astrol" />
+                <ScalarProperty Name="Test" ColumnName="Test" />
+                <ScalarProperty Name="ID_astrol" ColumnName="ID_astrol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Test_psixo">
+            <EntityTypeMapping TypeName="AgencyModel.Test_psixo">
+              <MappingFragment StoreEntitySet="Test_psixo">
+                <ScalarProperty Name="ID_test_psixo" ColumnName="ID_test_psixo" />
+                <ScalarProperty Name="Test" ColumnName="Test" />
+                <ScalarProperty Name="ID_psixo" ColumnName="ID_psixo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
